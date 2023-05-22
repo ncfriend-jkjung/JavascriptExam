@@ -7,10 +7,7 @@ var gameEl = document.getElementById("gameBox");
 var idx = 0;
 var timerID;
 
-var ScissorEl = new Item("가위", callGame);
-var RockEl = new Item("바위", callGame);
-var PaperEl = new Item("보", callGame);
-var Btns = [ScissorEl, RockEl, PaperEl];
+var Btns = [new Item("가위", callGame), new Item("바위", callGame), new Item("보", callGame)];
 Btns.forEach(function (item) {
   item.render(gameEl);
 });
