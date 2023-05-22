@@ -17,3 +17,6 @@ Item.prototype.setDisable = function (dis) {
     this.itemEl.removeAttribute("disabled");
   }
 };
+Item.prototype.getName = function () {
+  return this.itemEl.textContent;
+}
