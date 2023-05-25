@@ -1,6 +1,6 @@
-import { Chef } from "./Components/Chef.js";
-import { Menu } from "./Components/Menu.js";
-import { Server } from "./Components/Server.js";
+//import { Chef } from "./Components/Chef.js";
+//import { Menu } from "./Components/Menu.js";
+//import { Server } from "./Components/Server.js";
 
 
 var orders = [];

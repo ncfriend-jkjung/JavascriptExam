@@ -1,4 +1,4 @@
 module.exports = {
-  entry: "./widget/index.js",
+  entry: ["./Widget/index.js", "./Components/index.js",],
 
 }
