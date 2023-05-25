@@ -14,28 +14,28 @@ var todolist = [
 
 var todolistColumns = [{
   render: function (data) {
-    var el = Widget.checkbox({
+    var el = Widget.checkbox("check" + data.id, {
       checked: data.done,
       onChange: function (e) {
         data.done = e.target.checked;
-        Widget.listContents[0].setData(todolist.filter(function (item) { return !item.done; }));
-        Widget.listContents[1].setData(todolist.filter(function (item) { return item.done; }));
-        Widget.listContents[0].reload();
-        Widget.listContents[1].reload();
+        Widget.getControl("todo-list").setData(todolist.filter(function (item) { return !item.done; }));
+        Widget.getControl("done-list").setData(todolist.filter(function (item) { return item.done; }));
+        Widget.getControl("todo-list").reload();
+        Widget.getControl("done-list").reload();
       }
     });
     return el;
   }
 }, {
   render: function (data) {
-    var el = Widget.span({
+    var el = Widget.span("span" + data.id, {
       label: data.contents
     });
     return el;
   }
 }, {
   render: function (data) {
-    var el = Widget.button({
+    var el = Widget.button("delBtn" + data.id, {
       label: "삭제",
       onClick: function () {
         todolist.splice(todolist.indexOf(data), 1);
@@ -51,27 +51,33 @@ var todolistColumns = [{
 ];
 
 
-var ControlContainer = document.getElementById("control-container");
-var BodyContainer = document.getElementById("body-container");
+//var ControlContainer = document.getElementById("control-container");
+//var BodyContainer = document.getElementById("body-container");
 
-var todolistControl = Widget.list({
+var ControlContainer = Widget.div("control-container", {});
+var BodyContainer = Widget.div("body-container", {});
+document.body.append(ControlContainer.el);
+document.body.append(BodyContainer.el);
+
+var todolistControl = Widget.list("todo-list", {
   datas: todolist.filter(function (item) { return !item.done; }),
   columns: todolistColumns
 });
-var donelistControl = Widget.list({
+var donelistControl = Widget.list("done-list", {
   datas: todolist.filter(function (item) { return item.done; }),
   columns: todolistColumns
 });
-BodyContainer.append(todolistControl.el);
-BodyContainer.append(donelistControl.el);
+BodyContainer.append(todolistControl);
+BodyContainer.append(donelistControl);
 
 
-var inputControl = Widget.input({
-
+var inputControl = Widget.input("todo-contents", {
 });
-var inputBtnControl = Widget.button({
+var inputBtnControl = Widget.button("todo-inputBtn", {
+
   label: "입력",
   onClick: function () {
+    var inputControl = Widget.getControl("todo-contents");
     var context = inputControl.getValue();
     todolist.push({
       id: crypto.randomUUID(),
@@ -86,5 +92,5 @@ var inputBtnControl = Widget.button({
 });
 
 
-ControlContainer.append(inputControl.el);
-ControlContainer.append(inputBtnControl.el);
+ControlContainer.append(inputControl);
+ControlContainer.append(inputBtnControl);
