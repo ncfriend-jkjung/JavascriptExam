@@ -110,6 +110,10 @@ function run(menu) {
     .then(function (args) {
       var freeChef = args[0];
       menu = args[1];
+      //주문 들어온 순서를 맞추려면, orders 목록의 첫번째 요청만 처리하는 걸로 하면 됨
+      if (orders.indexOf(menu) > 0) {
+        return run(menu);
+      }
       //주문 목록 이동
       Widget.getControl("menuList").pop(menu);
       freeChef.setMenu(menu);
